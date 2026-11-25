@@ -1,0 +1,1212 @@
+<!DOCTYPE html>
+<html lang="en-IE">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Who Wrecked Lower Wobbleton</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Atkinson+Hyperlegible:wght@400;700&family=Bricolage+Grotesque:opsz,wght@12..96,600;12..96,800&display=swap" rel="stylesheet">
+<style>
+/* Layout idea: a calm single column that reads like a case file, with a yellow highlighter accent and one colour per evidence file. */
+:root {
+  --ink: #14213d;
+  --paper: #f4f6fb;
+  --card: #ffffff;
+  --line: #cfd7e8;
+  --muted: #44516f;
+  --tint: #e8edf8;
+  --accent: #f2b705;
+  --accent-ink: #241a00;
+  --good: #166534;
+  --good-bg: #e3f4e8;
+  --bad: #991b1b;
+  --bad-bg: #fbe7e7;
+  --bar: #14213d;
+  --bar-ink: #f4f6fb;
+  --f1: #0f766e;
+  --f2: #6d28d9;
+  --f3: #c2410c;
+  --f4: #be185d;
+  --display: "Bricolage Grotesque", "Trebuchet MS", system-ui, sans-serif;
+  --body: "Atkinson Hyperlegible", "Segoe UI", system-ui, -apple-system, sans-serif;
+  color-scheme: light;
+}
+@media (prefers-color-scheme: dark) {
+  :root:not([data-theme="light"]) {
+    --ink: #e8edf8;
+    --paper: #0d1424;
+    --card: #162038;
+    --line: #2c3b5e;
+    --muted: #aebad6;
+    --tint: #1d2a47;
+    --good: #86efac;
+    --good-bg: #12301f;
+    --bad: #fca5a5;
+    --bad-bg: #3a1717;
+    --bar: #0a101d;
+    color-scheme: dark;
+  }
+}
+:root[data-theme="dark"] {
+  --ink: #e8edf8;
+  --paper: #0d1424;
+  --card: #162038;
+  --line: #2c3b5e;
+  --muted: #aebad6;
+  --tint: #1d2a47;
+  --good: #86efac;
+  --good-bg: #12301f;
+  --bad: #fca5a5;
+  --bad-bg: #3a1717;
+  --bar: #0a101d;
+  color-scheme: dark;
+}
+
+* { box-sizing: border-box; }
+html { -webkit-text-size-adjust: 100%; }
+body {
+  margin: 0;
+  background: var(--paper);
+  color: var(--ink);
+  font-family: var(--body);
+  font-size: 1.0625rem;
+  line-height: 1.65;
+}
+body.lock { overflow: hidden; }
+h1, h2, h3 { font-family: var(--display); line-height: 1.12; margin: 0; text-wrap: balance; }
+p { margin: 0 0 1rem; max-width: 68ch; }
+button { font: inherit; color: inherit; }
+:focus-visible { outline: 3px solid var(--accent); outline-offset: 3px; border-radius: 4px; }
+.sr { position: absolute; width: 1px; height: 1px; overflow: hidden; clip: rect(0 0 0 0); white-space: nowrap; }
+
+/* top bar */
+.bar { background: var(--bar); color: var(--bar-ink); }
+.bar-inner { max-width: 820px; margin: 0 auto; padding: 12px 20px; display: flex; align-items: center; justify-content: space-between; gap: 16px; }
+.brand { font-family: var(--display); font-weight: 800; font-size: 1.05rem; letter-spacing: 0.01em; background: none; border: 0; padding: 6px 0; cursor: pointer; color: var(--bar-ink); display: flex; align-items: center; gap: 10px; text-align: left; }
+.brand svg { flex: none; }
+.bar .btn { background: transparent; color: var(--bar-ink); border-color: rgba(244, 246, 251, 0.45); min-height: 40px; padding: 6px 14px; }
+.bar .btn:hover { background: rgba(244, 246, 251, 0.12); }
+
+main { max-width: 820px; margin: 0 auto; padding: 36px 20px 96px; }
+
+/* headings and text */
+.hero { margin-bottom: 8px; }
+.hero h1 { font-size: clamp(2.2rem, 7vw, 3.7rem); font-weight: 800; letter-spacing: -0.02em; }
+.hero h1 .hl { background: linear-gradient(transparent 62%, var(--accent) 62%, var(--accent) 92%, transparent 92%); padding: 0 4px; margin: 0 -4px; }
+.hero.small h1 { font-size: clamp(1.8rem, 5vw, 2.7rem); }
+.eyebrow { font-family: var(--display); font-weight: 600; font-size: 0.85rem; letter-spacing: 0.1em; text-transform: uppercase; color: var(--muted); margin: 0 0 12px; }
+.lead { font-size: 1.2rem; margin-top: 18px; }
+.block { margin-top: 48px; }
+.block h2 { font-size: 1.55rem; margin-bottom: 14px; font-weight: 800; }
+.block h3 { font-size: 1.15rem; margin: 22px 0 8px; }
+.plain { margin: 0 0 1rem; padding-left: 1.2rem; max-width: 68ch; }
+.plain li { margin-bottom: 6px; }
+.crumbs { margin-bottom: 18px; }
+.linkbtn { background: none; border: 0; padding: 6px 0; color: var(--ink); text-decoration: underline; text-underline-offset: 3px; cursor: pointer; }
+.callout { background: var(--card); border: 1px solid var(--line); border-left: 6px solid var(--accent); border-radius: 10px; padding: 20px 22px; margin-top: 24px; }
+.callout p:last-child { margin-bottom: 0; }
+.block.callout { margin-top: 48px; }
+.block.callout h2 { margin-bottom: 10px; }
+
+/* numbered steps */
+.steps { list-style: none; counter-reset: s; margin: 0; padding: 0; display: grid; gap: 14px; max-width: 68ch; }
+.steps li { counter-increment: s; position: relative; padding-left: 52px; }
+.steps li::before { content: counter(s); position: absolute; left: 0; top: 0; width: 36px; height: 36px; border-radius: 50%; background: var(--ink); color: var(--paper); font-family: var(--display); font-weight: 800; display: grid; place-items: center; }
+
+/* buttons */
+.btn { display: inline-flex; align-items: center; justify-content: center; gap: 8px; min-height: 46px; padding: 10px 22px; border-radius: 10px; border: 2px solid var(--ink); background: var(--card); color: var(--ink); font-weight: 700; cursor: pointer; }
+.btn:hover:not(:disabled) { background: var(--tint); }
+.btn.primary { background: var(--accent); color: var(--accent-ink); border-color: var(--accent); }
+.btn.primary:hover:not(:disabled) { background: #ffc61f; }
+.btn:disabled { opacity: 0.45; cursor: not-allowed; }
+.actions { display: flex; flex-wrap: wrap; gap: 14px; }
+
+/* case cards */
+.cases { display: grid; gap: 14px; }
+.casecard { display: flex; gap: 18px; align-items: flex-start; text-align: left; width: 100%; background: var(--card); border: 2px solid var(--line); border-radius: 14px; padding: 18px 20px; cursor: pointer; transition: border-color 0.15s, transform 0.15s; }
+.casecard:hover { border-color: var(--ink); transform: translateY(-2px); }
+.casenum { flex: none; width: 52px; height: 52px; border-radius: 12px; background: var(--ink); color: var(--paper); font-family: var(--display); font-weight: 800; font-size: 1.7rem; display: grid; place-items: center; }
+.casebody { display: grid; gap: 4px; }
+.level { font-family: var(--display); font-weight: 600; font-size: 0.8rem; letter-spacing: 0.1em; text-transform: uppercase; color: var(--muted); }
+.casetitle { font-family: var(--display); font-weight: 800; font-size: 1.25rem; line-height: 1.2; }
+.caseteaser { color: var(--muted); }
+
+/* file cards */
+.files { display: grid; gap: 14px; grid-template-columns: 1fr; margin: 18px 0 0; }
+@media (min-width: 680px) { .files { grid-template-columns: 1fr 1fr; } }
+.filecard { display: flex; gap: 16px; align-items: flex-start; text-align: left; background: var(--card); border: 2px solid var(--line); border-top: 8px solid var(--fc); border-radius: 4px 14px 14px 14px; padding: 16px 18px 18px; cursor: pointer; transition: transform 0.15s, border-color 0.15s; }
+.filecard:hover { transform: translateY(-2px); border-color: var(--fc); }
+.filenum { flex: none; width: 46px; height: 46px; border-radius: 50%; background: var(--fc); color: #fff; font-family: var(--display); font-weight: 800; font-size: 1.5rem; display: grid; place-items: center; }
+.filebody { display: grid; gap: 6px; }
+.filename { font-family: var(--display); font-weight: 800; font-size: 1.1rem; line-height: 1.2; }
+.fileabout { color: var(--muted); font-size: 0.97rem; line-height: 1.5; }
+.f1 { --fc: var(--f1); } .f2 { --fc: var(--f2); } .f3 { --fc: var(--f3); } .f4 { --fc: var(--f4); }
+
+/* file page */
+.filepage { border-top: 10px solid var(--fc); margin: -36px -20px 0; padding: 28px 20px 0; }
+@media (min-width: 860px) { .filepage { margin: -36px 0 0; padding-left: 0; padding-right: 0; } }
+.filetop { margin-bottom: 22px; }
+.bignum { display: inline-grid; place-items: center; width: 1.15em; height: 1.15em; border-radius: 50%; background: var(--fc); color: #fff; font-size: 0.9em; vertical-align: 0.03em; margin-right: 6px; }
+
+/* tables */
+.tablewrap { overflow-x: auto; margin: 0 0 22px; border: 1px solid var(--line); border-radius: 10px; background: var(--card); }
+table { border-collapse: collapse; width: 100%; font-variant-numeric: tabular-nums; }
+caption { text-align: left; font-family: var(--display); font-weight: 800; font-size: 1.05rem; padding: 14px 16px 10px; }
+th, td { padding: 12px 16px; border-top: 1px solid var(--line); text-align: left; vertical-align: top; }
+thead th { background: var(--tint); font-size: 0.9rem; }
+tbody th { font-weight: 400; min-width: 12rem; }
+.num { text-align: right; white-space: nowrap; }
+.total th, .total td { font-weight: 700; background: var(--tint); }
+.blank { display: inline-block; padding: 2px 10px; border: 2px dashed var(--muted); border-radius: 6px; color: var(--muted); font-size: 0.9rem; white-space: nowrap; }
+.tablenote { margin: -10px 0 22px; color: var(--muted); font-size: 0.97rem; }
+
+/* witnesses */
+.quote { margin: 0 0 18px; padding: 18px 22px; background: var(--card); border: 1px solid var(--line); border-left: 6px solid var(--fc, var(--accent)); border-radius: 10px; max-width: 68ch; }
+.quote blockquote { margin: 0 0 10px; font-size: 1.1rem; }
+.quote figcaption { color: var(--muted); font-weight: 700; font-size: 0.95rem; }
+.questions { padding-left: 1.3rem; max-width: 68ch; }
+.questions li { margin-bottom: 14px; padding-left: 4px; }
+
+/* team table options */
+.step h2 { display: flex; align-items: center; gap: 14px; }
+.stepno { flex: none; width: 40px; height: 40px; border-radius: 50%; background: var(--ink); color: var(--paper); display: grid; place-items: center; font-family: var(--display); }
+.suspects, .clues, .remedies { display: grid; gap: 12px; margin: 18px 0 22px; }
+.opt { display: flex; gap: 14px; align-items: flex-start; padding: 16px 18px; background: var(--card); border: 2px solid var(--line); border-radius: 12px; cursor: pointer; }
+.opt:hover { border-color: var(--ink); }
+.opt input { flex: none; width: 22px; height: 22px; margin: 3px 0 0; accent-color: var(--ink); }
+.opt.picked { border-color: var(--ink); background: var(--tint); }
+.opt.chosen { border-color: var(--good); background: var(--good-bg); }
+.opt.ruled { opacity: 1; background: var(--bad-bg); border-color: var(--bad); cursor: default; }
+.opt.dim { opacity: 0.55; cursor: not-allowed; }
+.optbody { display: grid; gap: 4px; }
+.optname { font-weight: 700; }
+.term { font-weight: 400; color: var(--muted); }
+.optdesc { color: var(--muted); font-size: 0.97rem; }
+.ruledtext { margin-top: 8px; color: var(--ink); font-size: 0.97rem; }
+.result { padding: 14px 18px; border-radius: 10px; margin: 16px 0; max-width: 68ch; }
+.result.good { background: var(--good-bg); color: var(--good); border: 1px solid var(--good); }
+.result.bad { background: var(--bad-bg); color: var(--bad); border: 1px solid var(--bad); }
+.counter { margin: 14px 0 0; }
+
+/* verdict */
+.verdict { position: relative; }
+.stamp { display: inline-block; font-family: var(--display); font-weight: 800; text-transform: uppercase; letter-spacing: 0.12em; font-size: 1.1rem; color: var(--bad); border: 4px solid var(--bad); border-radius: 8px; padding: 6px 16px; transform: rotate(-4deg); margin-bottom: 22px; animation: stamp 0.45s cubic-bezier(0.2, 1.4, 0.4, 1) both; }
+@keyframes stamp { from { transform: rotate(-4deg) scale(2.2); opacity: 0; } to { transform: rotate(-4deg) scale(1); opacity: 1; } }
+@media (prefers-reduced-motion: reduce) { .stamp { animation: none; } .casecard, .filecard { transition: none; } }
+.culprit { font-size: 1.15rem; }
+.review { list-style: none; padding: 0; margin: 0; display: grid; gap: 12px; }
+.review li { background: var(--card); border: 1px solid var(--line); border-left: 6px solid var(--line); border-radius: 10px; padding: 14px 18px; display: grid; gap: 6px; }
+.review li.good { border-left-color: var(--good); }
+.review li.bad { border-left-color: var(--bad); }
+.review li.missed { border-left-color: var(--accent); }
+.status { font-weight: 700; font-size: 0.92rem; }
+.review .good .status { color: var(--good); }
+.review .bad .status { color: var(--bad); }
+.cluetext { font-weight: 700; }
+.why { color: var(--muted); font-size: 0.97rem; }
+
+/* key words panel */
+#panel { position: fixed; inset: 0; background: rgba(10, 16, 29, 0.6); display: flex; justify-content: flex-end; z-index: 20; }
+#panel[hidden] { display: none; }
+.panelbox { width: min(520px, 100%); height: 100%; overflow-y: auto; background: var(--paper); color: var(--ink); padding: 22px 22px 48px; box-shadow: -8px 0 30px rgba(0, 0, 0, 0.3); }
+.panelhead { display: flex; justify-content: space-between; align-items: center; gap: 12px; margin-bottom: 18px; position: sticky; top: -22px; background: var(--paper); padding: 22px 0 12px; }
+.panelhead h2 { font-size: 1.6rem; }
+.panelbox dt { font-family: var(--display); font-weight: 800; margin-top: 18px; }
+.panelbox dd { margin: 4px 0 0; color: var(--muted); }
+</style>
+</head>
+<body data-screen="home">
+<header class="bar">
+  <div class="bar-inner">
+    <button class="brand" data-act="home" aria-label="Who Wrecked Lower Wobbleton, go to the start">
+      <svg width="26" height="26" viewBox="0 0 26 26" aria-hidden="true"><circle cx="10.5" cy="10.5" r="7" fill="none" stroke="#f2b705" stroke-width="3"/><line x1="15.8" y1="15.8" x2="23" y2="23" stroke="#f2b705" stroke-width="3.4" stroke-linecap="round"/></svg>
+      <span>Who Wrecked Lower Wobbleton?</span>
+    </button>
+    <button class="btn" id="keywords-btn" type="button">Key words</button>
+  </div>
+</header>
+<main id="app"></main>
+<div id="panel" hidden></div>
+<script>
+const H = ["", "Two years ago", "Last year", "This year"];
+
+const FILE_ROLES = {
+  1: { name: "Jobs and Output", about: "Your file shows how many people have jobs, which industries are growing or shrinking, and how much the country is producing." },
+  2: { name: "Prices and Spending", about: "Your file shows how prices are changing and how much households are spending." },
+  3: { name: "Trade and Exchange Rates", about: "Your file shows what the country buys from abroad and sells abroad, and how its currency, the plonk, compares with other currencies." },
+  4: { name: "Government and Banks", about: "Your file shows what the government and the Central Bank have been doing with taxes, spending, borrowing and interest rates." }
+};
+
+const SUSPECTS = [
+  { id: "demandpull", name: "Too much spending", term: "Demand-pull inflation", desc: "People, firms and the government are spending faster than the country can produce, which pushes prices up." },
+  { id: "costpush", name: "Rising costs of production", term: "Cost-push inflation", desc: "It has become dearer for firms to make things, so they raise their prices to cover the extra cost." },
+  { id: "appreciation", name: "A stronger currency", term: "Currency appreciation", desc: "The country's money has become dearer in terms of other currencies, which makes its exports more expensive for foreign buyers." },
+  { id: "foreignslump", name: "A recession abroad", term: "A fall in demand from trading partners", desc: "Customers in another country have less income, so they buy fewer of the goods the country sells to them." },
+  { id: "structural", name: "Skills that no longer fit the jobs", term: "Structural unemployment", desc: "An industry has changed or closed, and the unemployed workers do not have the skills, or do not live where the new jobs are." },
+  { id: "cuts", name: "Government cuts and tax rises", term: "Contractionary fiscal policy", desc: "The government has reduced its spending or raised taxes, which takes spending power out of the economy." }
+];
+
+const GLOSSARY = [
+  ["Appreciation", "A rise in the price of a currency in terms of other currencies. If one plonk used to buy 1.00 krumb and now buys 1.50 krumbs, the plonk has appreciated."],
+  ["Budget deficit", "The amount by which the government's spending is larger than the tax income it collects in a year. It is shown here as a percentage of national income."],
+  ["Cost-push inflation", "A rise in prices caused by a rise in firms' costs of production, such as dearer energy or raw materials."],
+  ["Demand-pull inflation", "A rise in prices caused by total spending in the economy growing faster than the economy is able to produce."],
+  ["Exchange rate", "The price of one country's currency in terms of another's. In this game it is the number of krumbs that one plonk buys."],
+  ["Exports and imports", "Exports are goods and services that a country sells to other countries. Imports are goods and services that it buys from other countries."],
+  ["Index", "A way of showing change by setting a starting year equal to 100. An index of 91 means the figure has fallen by 9% since that year, and an index of 130 means it has risen by 30%."],
+  ["Inflation", "The rate at which the general level of prices rises over a year."],
+  ["Interest rate", "The price of borrowing money, shown as a percentage of the amount borrowed. A higher interest rate also gives savers and foreign depositors a better reward."],
+  ["Multiplier effect", "When spending changes, total income changes by more than the original amount, because one person's spending is another person's income."],
+  ["National income", "The total value of everything the country produces in a year. Government spending and the budget deficit are shown as a percentage of this figure."],
+  ["Plonk and krumb", "The plonk is the money of Lower Wobbleton. The krumb is the money of Grumbria, the large neighbour that buys most of Lower Wobbleton's exports."],
+  ["Recession", "A period in which the total output of an economy falls, usually with unemployment rising."],
+  ["Red herring", "A clue that looks important but does not explain the problem. Some of the details in your files are red herrings, which means your team has to decide which ones matter."],
+  ["Structural unemployment", "Unemployment that exists because the skills or locations of unemployed people do not match the jobs available, often after an industry closes or changes."],
+  ["Trade surplus and deficit", "Exports minus imports. A positive figure is a surplus and a negative figure is a deficit."],
+  ["Vacancy", "A job that an employer is trying to fill."]
+];
+
+const CASES = [
+  /* ------------------------------------------------------------ CASE 1 */
+  {
+    id: 1,
+    level: "Warm-up",
+    title: "The Case of the Carnival Credit Cards",
+    teaser: "Prices are racing upwards and it seems that everyone owns a yacht.",
+    scene: "In Lower Wobbleton the Central Bank has made borrowing very cheap and the government has cut taxes. Shops are packed, builders are booked for years and almost everyone seems to own a yacht, although the island has only two lakes. Prices are now rising quickly, and your team has been asked to find out why.",
+    headlines: [
+      "Inflation has risen from 2% to 8% in two years.",
+      "Unemployment is at its lowest level on record.",
+      "The country is buying far more from abroad than it sells."
+    ],
+    culprit: "demandpull",
+    files: {
+      1: {
+        tables: [
+          { caption: "Unemployment and job vacancies", head: H, rows: [["Unemployment rate (%)", "5.0", "3.5", "2.2"], ["Job vacancies advertised", "4,000", "9,000", "14,000"]] },
+          { caption: "Growth in the country's output", head: H, rows: [["Growth in output (% per year)", "2.5", "5.5", "6.5"], ["Fastest growth the country can safely keep up (% per year)", "3.0", "3.0", "3.0"]], note: "The last row shows how fast the country's factories, shops and workers can expand each year without running short of workers and materials." }
+        ],
+        witnesses: [{ name: "Brenda Haddock", role: "Builder", quote: "I cannot find a plasterer anywhere on the island. I offered one a company van, a bonus and a sausage supper, and he asked whether the sausage supper could be two sausage suppers." }],
+        questions: [
+          "Almost everyone who wants a job has one, and firms still cannot fill 14,000 vacancies. What do you think this does to the wages that firms have to offer?",
+          "Output is growing faster than the safe rate shown in the second table. What problems could this cause?"
+        ]
+      },
+      2: {
+        tables: [
+          { caption: "Inflation and spending", head: H, rows: [["Inflation (% per year)", "2.0", "5.0", "8.0"], ["Growth in household spending (% per year)", "3.0", "7.0", "9.0"], ["Share of income that households save (%)", "8", "5", "3"]] },
+          { caption: "How much prices rose this year (%)", head: ["", "This year"], rows: [["Houses", "14"], ["Cars", "10"], ["Restaurant meals", "9"], ["Clothing", "7"], ["Energy (gas, electricity and fuel)", "3"]] }
+        ],
+        witnesses: [{ name: "Tobias Fennel", role: "Restaurant owner", quote: "Every table is booked for months. I put my prices up by ten percent and the bookings went up as well. I do not understand economics, but I am enjoying it very much." }],
+        questions: [
+          "Prices have risen in almost every category, including some that have little to do with energy or wages. What does this suggest about why firms feel able to raise their prices?",
+          "Households are saving less and spending more. What has to be true for people to spend more than they used to?"
+        ]
+      },
+      3: {
+        tables: [
+          { caption: "Trade with the rest of the world (millions of plonks per year)", head: H, rows: [["Exports", "800", "820", "840"], ["Imports", "700", "950", "1,150"], ["Surplus or deficit (exports minus imports)", "+100", "-130", "-310"]] },
+          { caption: "Prices of imports (index, two years ago = 100)", head: H, rows: [["Imported oil and gas", "100", "100", "101"], ["Imported raw materials", "100", "101", "102"], ["Imported goods in the shops", "100", "101", "101"]] },
+          { caption: "Exchange rate", head: H, rows: [["Krumbs bought by one plonk", "1.00", "1.00", "1.00"]] }
+        ],
+        witnesses: [{ name: "Gerald Pimm", role: "Customs officer", quote: "Ships bring in new yachts, cars and televisions every day. I have started to wonder whether the entire island is trying to buy one of everything." }],
+        questions: [
+          "The prices of imports have hardly changed, yet the amount imported has risen sharply. What does that tell you about how much people want to buy?",
+          "What does the exchange rate table rule out as a cause of the problem?"
+        ]
+      },
+      4: {
+        tables: [
+          { caption: "Interest rates and borrowing", head: H, rows: [["Central Bank interest rate (%)", "3.0", "1.0", "0.5"], ["Total borrowing by households (millions of plonks)", "400", "700", "1,150"]] },
+          { caption: "Government taxes and spending", head: H, rows: [["Basic income tax rate (%)", "24", "24", "20"], ["Government spending (% of national income)", "30", "33", "36"], ["Budget deficit (% of national income)", "1", "3", "5"]] }
+        ],
+        witnesses: [{ name: "Sir Pelham Dunkley", role: "Governor of the Central Bank", quote: "I lowered interest rates because a cheerful economy seemed better than a gloomy one. I can now see that there is a limit to how much cheerfulness an island can hold." }],
+        questions: [
+          "Lower interest rates and lower income tax each change how much money people can spend and how much they want to spend. What effect would you expect from each?",
+          "What does the growing budget deficit tell you about the government's own spending?"
+        ]
+      }
+    },
+    whyNot: {
+      costpush: "Firms' costs have hardly moved. Import prices are up by about 1% and energy prices by only 3%, which means firms are raising prices because customers are willing to pay more, not because they are being forced to.",
+      appreciation: "The exchange rate has stayed at 1 plonk to 1 krumb for three years, so it has not changed the price of exports or imports. Exports have also kept growing slightly.",
+      foreignslump: "Exports have risen from 800 to 840 million plonks, which means customers abroad are still buying. A slump abroad would also push jobs and prices down at home, whereas here jobs are plentiful and prices are rising.",
+      structural: "Unemployment has fallen to 2.2% and there are 14,000 vacancies, so there is no large group of unemployed people whose skills fail to match the jobs.",
+      cuts: "The government has done the opposite of cutting. It has lowered income tax and raised its own spending from 30% to 36% of national income."
+    },
+    explanation: "Cheaper borrowing, a cut in income tax and extra government spending all increased how much people and firms were able and willing to spend. Households borrowed nearly three times as much as before, so total spending grew at about 9% a year, while the country can safely increase its output by only about 3% a year. Firms ran flat out and workers became scarce, so with too much spending chasing too few goods, firms raised their prices. Imports surged because Wobbleton's own producers could not supply everything that people wanted to buy. Prices rose because of the pull of excess demand, which is why economists call this demand-pull inflation.",
+    clues: [
+      { id: "a", text: "Unemployment is only 2.2% and there are 14,000 vacancies, so firms are competing for scarce workers.", from: [1], key: true, why: "When almost everyone who wants a job has one, firms cannot produce much more, which means extra spending is met by higher prices instead of higher output." },
+      { id: "b", text: "Household spending is growing at 9% a year, while the economy can only safely grow by 3% a year.", from: [1, 2], key: true, why: "Spending is growing about three times as fast as the country can increase its output, which means too much money is chasing too few goods." },
+      { id: "c", text: "Interest rates fell to 0.5%, income tax was cut and government spending rose, while household borrowing nearly tripled.", from: [4], key: true, why: "These are the sources of the extra spending, so they show where the excess demand came from." },
+      { id: "d", text: "Imports rose from 700 to 1,150 million plonks while import prices hardly changed.", from: [3], key: true, why: "If costs abroad had risen, import prices would have risen too. The amount imported surged because people in Lower Wobbleton want to buy more." },
+      { id: "e", text: "Brenda Haddock's plasterer asked for two sausage suppers.", from: [1], key: false, why: "This is an amusing detail that tells you nothing about the cause of rising prices." },
+      { id: "f", text: "The exchange rate has stayed at 1 plonk to 1 krumb for three years.", from: [3], key: false, why: "This helps to rule out the exchange rate as a cause, but it does not show what has pushed prices up." },
+      { id: "g", text: "Energy prices rose by only 3% this year.", from: [2], key: false, why: "This helps to rule out a rise in costs as the cause, but it does not show what has pushed prices up." },
+      { id: "h", text: "Tobias Fennel's restaurant is booked for months ahead.", from: [2], key: false, why: "One busy restaurant is a colourful detail, and the national figures for spending are much stronger evidence." }
+    ],
+    remedies: [
+      { text: "The Central Bank raises interest rates, and the government trims its spending or raises taxes, so that total spending grows more slowly.", pts: 2, why: "Higher interest rates make borrowing dearer and tax rises and spending cuts reduce spending power, which brings total demand back in line with what the country can produce." },
+      { text: "The government cuts taxes again so that firms can afford to hire more workers.", pts: 0, why: "Firms cannot find workers to hire, and a tax cut would add even more spending to an economy that is already spending too much." },
+      { text: "The government passes a law freezing the prices of houses and restaurant meals.", pts: 0, why: "A price freeze leaves the excess demand in place, which means shortages and queues would appear instead of higher prices." },
+      { text: "The government spends more on training and apprenticeships so that the country can produce more over time.", pts: 1, why: "This would raise the country's capacity to produce in the long run, but it works slowly and would not remove today's excess spending on its own." }
+    ]
+  },
+
+  /* ------------------------------------------------------------ CASE 2 */
+  {
+    id: 2,
+    level: "Warm-up",
+    title: "The Case of the Sausage Price Panic",
+    teaser: "Prices keep rising, yet the shops are quiet and nobody is buying.",
+    scene: "The national dish of Lower Wobbleton is the sausage supper. Over the past year its price has risen from 9 plonks to 11, and the prices of many other things have risen too. Oddly, the shops are quiet, the factories are cutting shifts and more people are out of work. Your team has been asked to find out why prices are rising when nobody seems to be buying.",
+    headlines: [
+      "Inflation has jumped from 3% to 9% in one year.",
+      "Output has fallen and unemployment has risen.",
+      "A sausage supper now costs 11 plonks, up from 9."
+    ],
+    culprit: "costpush",
+    files: {
+      1: {
+        tables: [
+          { caption: "Output, unemployment and vacancies", head: H, rows: [["Growth in output (% per year)", "3.0", "2.5", "-1.0"], ["Unemployment rate (%)", "5.0", "5.2", "7.5"], ["Job vacancies advertised", "9,000", "8,800", "5,200"]] },
+          { caption: "Output of factories (index, two years ago = 100)", head: H, rows: [["Factory output", "100", "104", "91"]] }
+        ],
+        witnesses: [
+          { name: "Hilda Crumb", role: "Sausage factory owner", quote: "My gas, electricity and diesel bills have gone up by about two thirds. I raised my prices to cover them, and then I cut two shifts because I could not sell as many sausages." },
+          { name: "Fergal Nuttall", role: "Factory worker", quote: "My working week was cut from five days to three. The canteen has also stopped serving a second sausage, which has damaged morale more than the pay cut." }
+        ],
+        questions: [
+          "Output has fallen and unemployment has risen. If prices were rising because people were spending too much, would you expect jobs to be easier or harder to find?",
+          "Which of her costs does Hilda Crumb say have gone up, and what did she do as a result?"
+        ]
+      },
+      2: {
+        tables: [
+          { caption: "Inflation and spending", head: H, rows: [["Inflation (% per year)", "2.0", "3.0", "9.0"], ["Change in the amount households buy (% per year)", "+3.0", "+2.0", "-2.0"], ["New loans to households (millions of plonks)", "400", "395", "380"]] },
+          { caption: "How much prices rose this year (%)", head: ["", "This year"], rows: [["Energy (gas, electricity and fuel)", "30"], ["Transport", "12"], ["Food", "12"], ["Services (haircuts, cinema tickets)", "3"], ["Clothing", "2"], ["All items together", "9"]] }
+        ],
+        witnesses: [{ name: "Dolores Finch", role: "Shopkeeper", quote: "My customers keep leaving without buying anything. I have put my prices up because my suppliers put theirs up, so I am only passing it on. Nobody is queueing at my door waving money." }],
+        questions: [
+          "Households are buying less than before. What does this tell you about whether people are demanding more goods or fewer?",
+          "Which prices have risen the most, and what do those goods and services have in common?"
+        ]
+      },
+      3: {
+        tables: [
+          { caption: "Prices of imports (index, two years ago = 100)", head: H, rows: [["Imported oil and gas", "100", "108", "175"], ["Imported wheat and animal feed", "100", "105", "130"], ["Imported machinery", "100", "101", "103"], ["Imported clothing", "100", "100", "101"]], note: "Lower Wobbleton imports 90% of the energy that it uses." },
+          { caption: "Exports and exchange rate", head: H, rows: [["Exports (millions of plonks)", "800", "810", "780"], ["Krumbs bought by one plonk", "1.00", "1.00", "1.00"]] }
+        ],
+        witnesses: [{ name: "Cormac Daly", role: "Port manager", quote: "The oil tankers arrive as often as before and carry the same amount. The invoices, however, have nearly doubled, because a group of oil-producing countries agreed to sell less of it." }],
+        questions: [
+          "Which imports have become much dearer, and which industries in Lower Wobbleton depend on them?",
+          "Exports have held up. What does that tell you about whether the problem is coming from customers abroad?"
+        ]
+      },
+      4: {
+        tables: [
+          { caption: "Wages, money and interest rates", head: H, rows: [["Wage growth (% per year)", "2.5", "2.5", "2.8"], ["Growth in the amount of money in the economy (% per year)", "2", "2", "2"], ["Central Bank interest rate (%)", "2.0", "2.0", "2.5"]] },
+          { caption: "Government budget", head: H, rows: [["Government spending (% of national income)", "30", "30", "30"], ["Budget deficit (% of national income)", "1", "1", "1"]] }
+        ],
+        witnesses: [
+          { name: "Lord Pinch", role: "Finance Minister", quote: "I have changed neither taxes nor spending, and I would like it known that I am blameless. I am also a little cold, because my heating bill has tripled." },
+          { name: "Una Gallagher", role: "Trade union leader", quote: "Our members did not ask for a big pay rise. Prices have risen faster than their wages, so they are worse off than they were." }
+        ],
+        questions: [
+          "Has the government or the Central Bank added extra money to the economy? What does your answer rule out?",
+          "Wages are rising by less than prices. Can rising wages be the reason that firms are putting up their prices?"
+        ]
+      }
+    },
+    whyNot: {
+      demandpull: "When spending grows too fast, output rises and jobs are easy to find. Here household buying has fallen by 2%, output has fallen and unemployment has risen, which is the opposite pattern.",
+      appreciation: "The exchange rate has stayed at 1 plonk to 1 krumb and exports have held up at about 780 million plonks, so the currency has not harmed trade.",
+      foreignslump: "Exports have held up, falling only from 800 to 780 million plonks, which means customers abroad are still buying. A slump abroad would also not explain why prices at home are rising.",
+      structural: "Job vacancies have fallen from 9,000 to 5,200, so there is no pile of unfilled jobs waiting for workers with the right skills. Firms are cutting jobs because production has become dearer, not because workers' skills are out of date.",
+      cuts: "Government spending has stayed at 30% of national income and the deficit has not changed, so the government has not taken spending power out of the economy. Spending cuts would also tend to lower prices rather than raise them."
+    },
+    explanation: "A group of oil-producing countries agreed to sell less, so the price of the oil and gas that Lower Wobbleton imports rose by about three quarters. Because the country imports 90% of its energy, firms in almost every industry faced much higher bills for power, transport and fertiliser, and they raised their prices to cover them. The inflation therefore came from the supply side of the economy, as the cost of producing goods rose, which is why it is called cost-push inflation. Higher prices then left households able to buy less, so spending and output fell and unemployment rose.",
+    clues: [
+      { id: "a", text: "Energy prices rose by 30% and food and transport by 12%, while clothing and services hardly changed.", from: [2], key: true, why: "Prices rose most in the goods and services that use a lot of energy, which points to a rise in costs and not to a general rise in spending." },
+      { id: "b", text: "The price of imported oil and gas is up by 75%, and Lower Wobbleton imports 90% of its energy.", from: [3], key: true, why: "A large rise in the price of something that almost every firm needs raises the cost of making almost everything." },
+      { id: "c", text: "Prices are rising at the same time as output is falling and unemployment is rising.", from: [1, 2], key: true, why: "When too much spending causes inflation, output and jobs rise. Here they fall, which means the cause lies in the costs of production." },
+      { id: "d", text: "Hilda Crumb says her gas, electricity and diesel bills are up by about two thirds, so she raised her prices and cut shifts.", from: [1], key: true, why: "A firm raising its prices to cover its own higher costs is the clearest sign of cost-push inflation." },
+      { id: "e", text: "The amount that households buy fell by 2% this year.", from: [2], key: false, why: "This is true, and it helps to rule out too much spending as the cause, but it does not show what is pushing prices up." },
+      { id: "f", text: "Government spending has stayed at 30% of national income.", from: [4], key: false, why: "This helps to rule out government cuts as the cause, but it does not show what is pushing prices up." },
+      { id: "g", text: "Fergal Nuttall's canteen has stopped serving a second sausage.", from: [1], key: false, why: "This is an amusing detail that tells you nothing about the cause." },
+      { id: "h", text: "The exchange rate has stayed at 1 plonk to 1 krumb.", from: [3], key: false, why: "This helps to rule out the currency as the cause, but it does not show what is pushing prices up." }
+    ],
+    remedies: [
+      { text: "The government cuts the tax on energy and spends on home-produced renewable energy, so that the country relies less on imported oil and gas.", pts: 2, why: "The tax cut eases firms' and households' costs quickly, and the new energy supply reduces the country's exposure to imported energy in future. Both measures deal with the rising costs directly." },
+      { text: "The government pays a heating allowance to low-income households.", pts: 1, why: "This protects the households that are hit hardest, but it does nothing to lower firms' costs or to reduce the country's reliance on imported energy." },
+      { text: "The Central Bank raises interest rates sharply to reduce spending.", pts: 0, why: "Spending is already falling, so higher interest rates would push the economy further into recession and raise unemployment without lowering the price of energy." },
+      { text: "The government gives every household a large cash payment to spend.", pts: 0, why: "This would add more spending to an economy where production is already squeezed by high costs, which could push prices up even further." }
+    ]
+  },
+
+  /* ------------------------------------------------------------ CASE 3 */
+  {
+    id: 3,
+    level: "Standard",
+    title: "The Case of the Empty Shipyard",
+    teaser: "Thousands of people have no job, and thousands of jobs have no one to do them.",
+    scene: "In the port district of Lower Wobbleton, the shipyard that employed 3,000 people closed its gates last year. Meanwhile a new data centre inland cannot find enough staff, and employers across the country say they have jobs that nobody applies for. Unemployment in the port is very high even though the rest of the country is doing well. Your team has been asked to find out why the jobs and the people are not meeting.",
+    headlines: [
+      "Unemployment in the port district has risen to 18%.",
+      "Employers across the country cannot fill 6,200 vacancies.",
+      "The rest of the economy is growing normally."
+    ],
+    culprit: "structural",
+    files: {
+      1: {
+        tables: [
+          { caption: "Unemployment rate (%)", head: H, rows: [["Port district", "5.0", "9.0", "18.0"], ["Rest of the country", "4.0", "4.0", "4.0"], ["Whole country", "4.1", "4.5", "5.4"]] },
+          { caption: "Unemployed people and job vacancies, whole country", head: H, rows: [["People unemployed", "7,400", "8,100", "9,700"], ["Job vacancies advertised", "3,000", "4,400", "6,200"]] },
+          { caption: "Growth in output", head: H, rows: [["Growth in output (% per year)", "3.1", "3.4", "3.2"]] }
+        ],
+        witnesses: [{ name: "Priya Okonkwo", role: "Data centre manager", quote: "I have 400 jobs that I cannot fill. Plenty of experienced welders have applied, and I admire them, but so far nobody has managed to configure a server with a blowtorch." }],
+        questions: [
+          "There are 9,700 people without jobs and 6,200 vacancies. How can both of these be true at the same time?",
+          "Where in the country is unemployment very high, and where is it not?"
+        ]
+      },
+      2: {
+        tables: [
+          { caption: "Inflation and spending", head: H, rows: [["Inflation (% per year)", "2.0", "2.1", "2.2"], ["Growth in household spending (% per year)", "3.0", "3.5", "3.4"]] },
+          { caption: "Change in shop sales this year (%)", head: ["", "This year"], rows: [["Shops in the port district", "-12"], ["Shops in the rest of the country", "+4"]] }
+        ],
+        witnesses: [{ name: "Seamus Rafferty", role: "Barber in the port district", quote: "Business is slow here, yet the barbers in the capital are booked until Thursday. I cannot decide whether to blame the economy or my own haircuts." }],
+        questions: [
+          "Is spending across most of the country strong or weak?",
+          "Why might shops in the port district have lost sales when the shipyard closed?"
+        ]
+      },
+      3: {
+        tables: [
+          { caption: "Exports (millions of plonks)", head: H, rows: [["Ships", "300", "150", "0"], ["Digital services (data storage and software)", "120", "190", "260"], ["Everything else", "380", "480", "540"], ["All exports", "800", "820", "800"]] },
+          { caption: "Price of one new ship (millions of plonks)", head: ["", "This year"], rows: [["Built in the Lower Wobbleton shipyard", "100"], ["Built in an overseas automated shipyard", "70"]] },
+          { caption: "Exchange rate", head: H, rows: [["Krumbs bought by one plonk", "1.00", "1.00", "1.00"]] }
+        ],
+        witnesses: [{ name: "Brendan Tully", role: "Former shipyard foreman", quote: "The new overseas yards use robots that never stop for tea. I built ships for 28 years and I could build one tomorrow, but nobody is ordering any." }],
+        questions: [
+          "Which export has disappeared and which has grown, and what does each of those industries need from its workers?",
+          "Why did buyers stop ordering ships from Lower Wobbleton?"
+        ]
+      },
+      4: {
+        tables: [
+          { caption: "Unemployed people by how long they have been out of work (%)", head: ["", "This year"], rows: [["Less than 6 months", "20"], ["6 to 12 months", "18"], ["More than 12 months", "62"]] },
+          { caption: "Skills, age and retraining in the port district", head: ["", "This year"], rows: [["Unemployed workers with a digital qualification (%)", "12"], ["Average age of unemployed port workers", "49"], ["Government-funded digital retraining places per year", "150"], ["Workers who need retraining (approximately)", "3,000"], ["Average time to sell a house in the port district (months)", "14"]] },
+          { caption: "Central Bank and government", head: H, rows: [["Central Bank interest rate (%)", "2.5", "2.5", "2.5"], ["Government spending (% of national income)", "30", "30", "30"]] }
+        ],
+        witnesses: [{ name: "Dame Winifred Spratt", role: "Minister for Education", quote: "We fund 150 retraining places a year, and I am aware that about 3,000 people need one. I am working on the problem steadily and, I admit, slowly." }],
+        questions: [
+          "How easy is it for a 49-year-old welder to take a job at an inland data centre? Make a list of the things that might stop him.",
+          "Is there a gap between the number of people who need retraining and the number of places?"
+        ]
+      }
+    },
+    whyNot: {
+      demandpull: "Inflation is steady at about 2% and there is no spending boom. If spending were running ahead of production, prices would be rising quickly.",
+      costpush: "Prices are rising at a steady 2% and there has been no jump in the cost of energy, wages or imports, so firms are not being forced to raise prices.",
+      appreciation: "The exchange rate has been stable at 1 plonk to 1 krumb, and total exports are holding at about 800 million plonks, so the currency is not holding back sales abroad.",
+      foreignslump: "Total exports have held steady and digital services exports have more than doubled, which means customers abroad are still buying. Only the demand for ships has gone, and it went because ships became cheaper to build elsewhere.",
+      cuts: "Government spending has stayed at 30% of national income, and spending in most of the country is growing strongly, so the government has not taken spending power out of the economy."
+    },
+    explanation: "Shipbuilding moved to automated overseas yards that could build ships more cheaply, so the Lower Wobbleton shipyard lost its orders and closed, while new digital industries grew inland. The unemployed shipyard workers have skills in welding and metalwork and not in computing, they are mostly in their late forties, and many find it hard to sell their houses and move. With only 150 retraining places for about 3,000 people who need them, vacancies and unemployment exist side by side. This is structural unemployment, which means the jobs on offer do not match the skills and the locations of the people who are out of work.",
+    clues: [
+      { id: "a", text: "There are 9,700 unemployed people and 6,200 unfilled vacancies at the same time.", from: [1], key: true, why: "If a shortage of spending were the problem, there would be few vacancies. Jobs and unemployed people existing together suggests that the people and the jobs do not match." },
+      { id: "b", text: "Unemployment is 18% in the port district and 4% in the rest of the country.", from: [1], key: true, why: "The problem is concentrated in one place and one former industry, which is typical of structural unemployment." },
+      { id: "c", text: "Ship exports fell from 300 million plonks to zero while digital service exports more than doubled.", from: [3], key: true, why: "This shows one industry disappearing and another growing, and the two industries need very different skills." },
+      { id: "d", text: "Only 12% of the unemployed port workers have a digital qualification, and there are 150 retraining places for about 3,000 people who need them.", from: [4], key: true, why: "This shows the gap in skills and the lack of training that stops unemployed workers from taking the new jobs." },
+      { id: "e", text: "The Central Bank interest rate has stayed at 2.5%.", from: [4], key: false, why: "This is true, but an unchanged interest rate does not explain why unemployment is concentrated in the port district." },
+      { id: "f", text: "Inflation has stayed at about 2%.", from: [2], key: false, why: "This helps to rule out inflation as the problem, but it does not explain why people are unemployed." },
+      { id: "g", text: "Seamus Rafferty says the barbers in the capital are booked until Thursday.", from: [2], key: false, why: "This is an amusing detail, and the figures for the whole country are better evidence." },
+      { id: "h", text: "The exchange rate has stayed at 1 plonk to 1 krumb.", from: [3], key: false, why: "This helps to rule out the currency as the cause, but it does not show why the port workers cannot find jobs." }
+    ],
+    remedies: [
+      { text: "The government increases the number of digital retraining places and helps workers who take jobs inland with the cost of moving.", pts: 2, why: "This tackles the mismatch directly, because it gives workers the skills that the new jobs need and helps them to move to where those jobs are." },
+      { text: "The government pays unemployment benefit for longer to the port workers.", pts: 1, why: "This protects the incomes of the unemployed workers for a while, but it does not help them to find new jobs, so the underlying problem remains." },
+      { text: "The Central Bank cuts interest rates to boost spending across the whole economy.", pts: 0, why: "Spending in most of the country is already growing, so this would push up inflation, and it would not give shipbuilders the skills the data centre needs." },
+      { text: "The government protects the shipyard by banning ships that are built overseas.", pts: 0, why: "This would make ships dearer for Wobbleton's own buyers, would invite other countries to restrict Wobbleton's exports in return, and would keep workers in an industry that can no longer compete." }
+    ]
+  },
+
+  /* ------------------------------------------------------------ CASE 4 */
+  {
+    id: 4,
+    level: "Standard",
+    title: "The Case of the Closed Libraries",
+    teaser: "The government has almost balanced its budget, and the economy has almost stopped.",
+    scene: "Two years ago the government of Lower Wobbleton decided that it had been spending too much, and it set out to balance its budget. Since then the libraries have closed, road repairs have stopped, and the cafés in towns that depend on public sector wages are empty. Exports are healthy and prices are steady, yet the economy has slowed. Your team has been asked to find out why.",
+    headlines: [
+      "Output is falling and unemployment is rising in most towns.",
+      "Export orders are healthy, but the shops are quiet.",
+      "Prices have stopped rising and are now falling slightly."
+    ],
+    culprit: "cuts",
+    files: {
+      1: {
+        tables: [
+          { caption: "Output, unemployment and vacancies", head: H, rows: [["Growth in output (% per year)", "3.0", "2.5", "-2.0"], ["Unemployment rate (%)", "5.0", "5.5", "9.0"], ["Job vacancies advertised", "8,000", "7,500", "3,000"]] },
+          { caption: "Unemployment by industry (%)", head: H, rows: [["Construction (mostly government contracts)", "6", "8", "19"], ["Shops and cafés", "5", "6", "10"], ["Export factories", "4", "4", "4.5"], ["Hospitals and schools", "2", "2", "3"]] }
+        ],
+        witnesses: [
+          { name: "Archibald Digby", role: "Road repair contractor", quote: "The government stopped all road repair contracts, so I laid off 40 workers. They stopped visiting the café by my yard, and the café has laid off two of its own staff." },
+          { name: "Cuthbert Lamb", role: "Former librarian", quote: "The library was closed because somebody called it a luxury. About 2,000 pensioners now stand at the bus stop in their coats, because the library was also where they kept warm." }
+        ],
+        questions: [
+          "Compare unemployment in construction, shops and cafés with unemployment in the export factories. What might explain the difference?",
+          "Archibald Digby's workers stopped visiting the café. What happens to a café's income when its customers lose their jobs?"
+        ]
+      },
+      2: {
+        tables: [
+          { caption: "Inflation and spending", head: H, rows: [["Inflation (% per year)", "2.0", "1.0", "-0.5"], ["Change in the amount households buy (% per year)", "+3.0", "+0.5", "-3.0"]] },
+          { caption: "Shop sales (index, two years ago = 100)", head: H, rows: [["Shop sales", "100", "101", "91"]] }
+        ],
+        witnesses: [{ name: "Dolores Finch", role: "Shopkeeper", quote: "Customers who used to work on the roads or in the council offices have stopped coming in. I have lowered my prices twice and I am still waiting for them." }],
+        questions: [
+          "Households are buying less and prices are falling. What does that tell you about the total amount of demand in the economy?",
+          "Does the fall in prices look like cheaper production, or like weak demand? Which evidence supports your view?"
+        ]
+      },
+      3: {
+        tables: [
+          { caption: "Trade with the rest of the world (millions of plonks per year)", head: H, rows: [["Exports", "800", "830", "865"], ["Imports", "700", "690", "620"], ["Surplus (exports minus imports)", "+100", "+140", "+245"]] },
+          { caption: "Grumbria's economy and the exchange rate", head: H, rows: [["Growth in Grumbria's national income (% per year)", "2.5", "2.5", "2.5"], ["Krumbs bought by one plonk", "1.00", "1.00", "1.00"]] }
+        ],
+        witnesses: [{ name: "Gerald Pimm", role: "Customs officer", quote: "Exports are doing very well. Imports have fallen, because fewer people on the island can afford the new yachts, which makes me a little sad." }],
+        questions: [
+          "Exports are growing but imports are falling. What can falling imports tell you about people's incomes and spending in Lower Wobbleton?",
+          "Are customers abroad buying more or less from Lower Wobbleton than before?"
+        ]
+      },
+      4: {
+        tables: [
+          { caption: "Government spending and taxes", head: H, rows: [["Government spending (% of national income)", "30", "26", "22"], ["Basic income tax rate (%)", "20", "22", "24"], ["VAT rate on goods and services (%)", "20", "21", "23"], ["Budget deficit (% of national income)", "4", "2", "0.5"]] },
+          { caption: "Central Bank", head: H, rows: [["Central Bank interest rate (%)", "2.0", "2.0", "2.0"]] }
+        ],
+        witnesses: [{ name: "Lord Pinch", role: "Finance Minister", quote: "I cut spending by nearly a fifth and raised income tax and VAT so that the budget would balance. It very nearly does, although I am told that the shops are quiet." }],
+        questions: [
+          "What happens to the money that people and firms have left to spend when taxes rise?",
+          "When the government stops spending on road repairs, whose income falls?"
+        ]
+      }
+    },
+    whyNot: {
+      demandpull: "Inflation is below zero and unemployment is rising, which means spending is too weak rather than too strong.",
+      costpush: "Inflation has turned negative and there has been no jump in the cost of energy, wages or imports, so firms are not being forced to raise their prices.",
+      appreciation: "The exchange rate has stayed at 1 plonk to 1 krumb and exports are growing, so the currency is not holding back sales abroad.",
+      foreignslump: "Exports are growing and Grumbria's economy is expanding at 2.5% a year, which means customers abroad are still buying. The weakness is in spending at home.",
+      structural: "Vacancies have fallen from 8,000 to 3,000, so there is no pile of jobs waiting for people with the right skills. The unemployed road workers and shop staff have skills that are still needed, and they lost their jobs because spending fell."
+    },
+    explanation: "The government cut its spending from 30% to 22% of national income and raised income tax and VAT to balance the budget. This took spending power out of the economy in two ways: firms that depended on government contracts lost orders, and households that paid higher taxes had less to spend. Because one person's spending is another person's income, the effects spread, so the laid-off road workers stopped spending in the café and the café laid off staff in its turn. This is called the multiplier effect, and it explains why a cut of a few percent of national income caused a larger fall in output. Total demand fell, so output fell, unemployment rose and prices stopped rising.",
+    clues: [
+      { id: "a", text: "Government spending fell from 30% to 22% of national income, while income tax and VAT both rose.", from: [4], key: true, why: "Lower spending and higher taxes both take spending power out of the economy, so this is the source of the problem." },
+      { id: "b", text: "Unemployment rose most in construction, from 6% to 19%, which depends on government contracts, while export factories were hardly affected.", from: [1], key: true, why: "The jobs were lost where the government's spending used to flow, while the industries that rely on customers abroad were unaffected." },
+      { id: "c", text: "Household buying fell by 3% and inflation is now below zero, so total demand has fallen.", from: [2], key: true, why: "Falling demand shows itself as falling sales and falling prices, which is what the shops are reporting." },
+      { id: "d", text: "Imports fell by about 10% while exports kept growing, which shows that people in Lower Wobbleton have less to spend.", from: [3], key: true, why: "Imports fall when incomes at home fall, and exports kept growing, so the weakness is at home and not abroad." },
+      { id: "e", text: "The Central Bank interest rate has stayed at 2.0%.", from: [4], key: false, why: "This is true, but an unchanged interest rate does not explain why spending has fallen." },
+      { id: "f", text: "The exchange rate has stayed at 1 plonk to 1 krumb.", from: [3], key: false, why: "This helps to rule out the currency as the cause, but it does not show what has reduced spending." },
+      { id: "g", text: "About 2,000 pensioners stand at the bus stop in their coats because the library has closed.", from: [1], key: false, why: "This is a vivid detail, but it shows a consequence of the closures and does not explain the fall in total spending." },
+      { id: "h", text: "Grumbria's economy is growing at 2.5% a year.", from: [3], key: false, why: "This helps to rule out a recession abroad, but it does not show what has happened at home." }
+    ],
+    remedies: [
+      { text: "The government restarts spending on road repairs, libraries and public buildings, and pays for it by borrowing while the economy recovers.", pts: 2, why: "This puts spending power back into the economy, and because of the multiplier effect each plonk the government spends supports further spending by the people who receive it." },
+      { text: "The Central Bank cuts interest rates further to encourage borrowing and spending.", pts: 1, why: "This could help a little, but interest rates are already low and households and firms with falling incomes are reluctant to borrow, so the effect would be limited." },
+      { text: "The government raises taxes again to reduce the deficit even further.", pts: 0, why: "This would take still more spending power out of an economy that is already in recession, which would make unemployment worse." },
+      { text: "The Central Bank lowers the exchange rate so that exports become cheaper for foreign buyers.", pts: 0, why: "Exports are already growing strongly, so the problem is weak spending at home, and a lower exchange rate would also make imports dearer for Wobbleton households." }
+    ]
+  },
+
+  /* ------------------------------------------------------------ CASE 5 */
+  {
+    id: 5,
+    level: "Tricky",
+    title: "The Case of the Quiet Cheese Counters",
+    teaser: "The orders from the big country next door have dried up, and nobody at home has done anything.",
+    scene: "Lower Wobbleton sells most of its cheese, jumpers and garden gnomes to its large neighbour, Grumbria. Over the past year the orders have shrunk, the factories have gone quiet and workers have been laid off. Prices in Lower Wobbleton look normal and the government has not changed anything. Your team has been asked to find out why the orders disappeared.",
+    headlines: [
+      "Exports to Grumbria have fallen by about a quarter.",
+      "Unemployment is rising fastest in the export towns.",
+      "Prices at home and the exchange rate look normal."
+    ],
+    culprit: "foreignslump",
+    files: {
+      1: {
+        tables: [
+          { caption: "Output and unemployment", head: H, rows: [["Growth in output (% per year)", "3.0", "1.5", "-1.5"], ["Unemployment rate (%)", "5.0", "5.5", "8.0"]] },
+          { caption: "Unemployment by industry (%)", head: H, rows: [["Export factories (cheese, jumpers and gnomes)", "4", "8", "16"], ["Shops and cafés", "5", "5.5", "6"], ["Construction", "6", "6", "6.5"], ["Hospitals and schools", "2", "2", "2"]] }
+        ],
+        witnesses: [{ name: "Ignatius Podge", role: "Jumper mill owner", quote: "My jumpers have not changed. They remain as itchy as ever, in the traditional way. Grumbria's shops have simply stopped placing orders." }],
+        questions: [
+          "Which industries have lost the most jobs, and what do they have in common?",
+          "Are the shops and the building industry in trouble to the same extent as the export factories?"
+        ]
+      },
+      2: {
+        tables: [
+          { caption: "Inflation and spending", head: H, rows: [["Inflation (% per year)", "2.0", "1.8", "1.0"], ["Growth in household spending (% per year)", "3.0", "2.5", "1.5"]] },
+          { caption: "What a Grumbrian buyer pays for Wobbleton goods (krumbs)", head: H, rows: [["Garden gnome", "20", "20", "20"], ["Woolly jumper", "40", "40", "40"], ["Block of cheese", "5", "5", "5"]] }
+        ],
+        witnesses: [{ name: "Dolores Finch", role: "Shopkeeper", quote: "People here are a little more careful with their money, but the real trouble is in the factory towns. The customers who work in the export factories are the ones who have stopped buying." }],
+        questions: [
+          "Have the prices that Grumbrian buyers pay for Wobbleton goods changed? What does your answer rule out?",
+          "Is spending at home collapsing, or are the export towns affected most?"
+        ]
+      },
+      3: {
+        tables: [
+          { caption: "Grumbria's economy", head: H, rows: [["Growth in national income (% per year)", "2.5", "0.5", "-3.5"], ["Unemployment rate (%)", "4", "6", "9"], ["Spending on imports from all countries (index, two years ago = 100)", "100", "97", "88"]] },
+          { caption: "Lower Wobbleton's exports (millions of plonks)", head: H, rows: [["To Grumbria", "500", "470", "380"], ["To the rest of the world", "300", "310", "320"]] },
+          { caption: "Exchange rate", head: H, rows: [["Krumbs bought by one plonk", "1.00", "1.00", "1.00"]] }
+        ],
+        witnesses: [{ name: "Hector Vance", role: "Importer in Grumbria", quote: "I adore Wobbleton gnomes and I would buy as many as ever. Half of my customers have lost their jobs, and the other half are saving their money in case they lose theirs." }],
+        questions: [
+          "Has Grumbria's economy been growing or shrinking, and how might that affect what its households buy?",
+          "Compare Lower Wobbleton's exports to Grumbria with its exports to the rest of the world."
+        ]
+      },
+      4: {
+        tables: [
+          { caption: "Government and Central Bank", head: H, rows: [["Central Bank interest rate (%)", "2.0", "2.0", "2.0"], ["Government spending (% of national income)", "30", "30", "30"], ["Basic income tax rate (%)", "20", "20", "20"], ["Budget deficit (% of national income)", "1", "2", "3"]] }
+        ],
+        witnesses: [{ name: "Lord Pinch", role: "Finance Minister", quote: "I have not changed any tax or any spending. The deficit is growing by itself, because fewer people are working and so fewer people are paying tax. It is rather like a bucket leaking in the rain." }],
+        questions: [
+          "Did the government or the Central Bank change any policy?",
+          "Why might the budget deficit grow even when the government does nothing?"
+        ]
+      }
+    },
+    whyNot: {
+      demandpull: "Inflation is falling to 1.0% and unemployment is rising, which is the opposite of what happens when spending is running ahead of production.",
+      costpush: "Inflation is falling and no costs have jumped. The factories are quiet because orders have vanished, not because firms are struggling with rising costs.",
+      appreciation: "The exchange rate has stayed at 1 plonk to 1 krumb, so a gnome still costs a Grumbrian buyer 20 krumbs. Wobbleton's goods are no dearer abroad than before.",
+      structural: "The idle factories still have the same machines and workers with the right skills. They are idle because orders have disappeared, and the workers could return to work if Grumbria's demand recovered.",
+      cuts: "The government has not changed taxes or spending. The deficit has risen because of the downturn, with fewer people paying tax, and not because of a decision to cut."
+    },
+    explanation: "Grumbria, which is Lower Wobbleton's biggest customer, went into recession. Its national income fell, its unemployment more than doubled and its households spent less on everything, including imports. Because Lower Wobbleton sells most of its goods to Grumbria, exports to that country fell by about a quarter even though prices and the exchange rate did not change, and the export industries laid off workers. Demand for a country's exports depends on the incomes of its customers abroad, which means that when incomes in Grumbria fell, orders in Lower Wobbleton fell with them.",
+    clues: [
+      { id: "a", text: "Unemployment in the export factories rose from 4% to 16%, while shops, building and public services were hardly affected.", from: [1], key: true, why: "The job losses are concentrated where the sales to foreign customers used to be, which points to a problem with demand abroad." },
+      { id: "b", text: "A Wobbleton gnome still costs a Grumbrian buyer 20 krumbs, so the fall in orders is not caused by higher prices.", from: [2], key: true, why: "Buyers are purchasing less at an unchanged price, which means they must have less to spend or less desire to spend." },
+      { id: "c", text: "Grumbria's national income fell by 3.5% and its unemployment more than doubled.", from: [3], key: true, why: "When incomes and jobs fall in Grumbria, its households buy less of everything, including goods from Lower Wobbleton." },
+      { id: "d", text: "Exports to Grumbria fell from 500 to 380 million plonks, while exports to the rest of the world rose from 300 to 320.", from: [3], key: true, why: "Only the sales to the country in recession have fallen, which locates the problem in Grumbria and not in Lower Wobbleton's goods." },
+      { id: "e", text: "The budget deficit has risen from 1% to 3% of national income.", from: [4], key: false, why: "This is a result of the downturn, because fewer people are paying tax, and not a cause of it." },
+      { id: "f", text: "The Central Bank interest rate has stayed at 2.0%.", from: [4], key: false, why: "This helps to rule out a change in interest rates as the cause, but it does not show what happened to the orders." },
+      { id: "g", text: "Ignatius Podge's jumpers are as itchy as ever.", from: [1], key: false, why: "This is an amusing detail, and its only use is to show that the product has not changed." },
+      { id: "h", text: "Inflation at home has fallen to 1.0%.", from: [2], key: false, why: "This is true, but low inflation does not by itself show why exports have fallen." }
+    ],
+    remedies: [
+      { text: "The government helps firms to find new customers in growing countries, for example through trade missions and marketing support.", pts: 2, why: "This reduces the country's reliance on one customer, so that a recession in one country does not do so much damage to Lower Wobbleton's exports in future." },
+      { text: "The Central Bank cuts interest rates so that the plonk becomes cheaper for foreign buyers.", pts: 1, why: "A cheaper plonk could win back some orders, but the main problem is the lack of income in Grumbria, and a lower exchange rate would also make imports dearer for households at home." },
+      { text: "The government raises taxes to reduce the budget deficit.", pts: 0, why: "This would take spending power out of an economy that is already in a downturn, which would make unemployment worse." },
+      { text: "The government bans imports from Grumbria in return for the fall in orders.", pts: 0, why: "Grumbria did not choose to cut its orders, and a ban would invite Grumbria to ban Wobbleton's exports in return, which would make things worse." }
+    ]
+  },
+
+  /* ------------------------------------------------------------ CASE 6 */
+  {
+    id: 6,
+    level: "Tricky",
+    title: "The Case of the Unwanted Garden Gnomes",
+    teaser: "The shops are full of bargains and the factories are silent.",
+    scene: "Lower Wobbleton sells garden gnomes, woolly jumpers and cheese to the rest of the world. Two years ago every factory was busy. Now the gnome factories are quiet, the jumper mills are laying off workers and the cheese warehouses are full of unsold cheese, even though Grumbria, the large neighbour that buys most of these goods, seems to be doing well. Your team has been asked to find out why.",
+    headlines: [
+      "Unemployment has risen from 5% to 8.5% in two years.",
+      "Warehouses are full of unsold exports.",
+      "Shops are full of cheap imported goods."
+    ],
+    culprit: "appreciation",
+    files: {
+      1: {
+        tables: [
+          { caption: "Unemployment rate (%)", head: H, rows: [["Export factories (gnomes, jumpers and cheese)", "4", "10", "22"], ["Shops and restaurants", "5", "5.5", "6"], ["Construction", "6", "6", "6"], ["Hospitals and schools", "2", "2", "2"], ["Whole country", "5.0", "6.5", "8.5"]] },
+          { caption: "Output (index, two years ago = 100)", head: H, rows: [["Export factories", "100", "82", "61"], ["Everything else", "100", "102", "103"]] }
+        ],
+        witnesses: [{ name: "Dorothea Gubbins", role: "Gnome factory owner", quote: "I used to sell 5,000 gnomes a month to Grumbria. Last month I sold 1,100. My gnomes have not changed, because they have the same pointy hats and the same unsettling smiles." }],
+        questions: [
+          "Which parts of the economy are struggling and which are fine? What do the struggling parts sell?",
+          "Mrs Gubbins says her gnomes have not changed. What else could have made foreign customers buy fewer of them?"
+        ]
+      },
+      2: {
+        tables: [
+          { caption: "Inflation, spending and wages", head: H, rows: [["Inflation (% per year)", "2.0", "1.3", "0.4"], ["Growth in household spending (% per year)", "3.0", "2.8", "2.5"], ["Wage growth (% per year)", "3.0", "3.0", "3.0"]] },
+          { caption: "Prices in Lower Wobbleton's shops (plonks)", head: H, rows: [["Imported chocolate bar", "4.00", "3.60", "3.10"], ["Imported trainers", "90", "78", "66"], ["Locally made cheese", "5.00", "5.00", "5.00"]] }
+        ],
+        witnesses: [{ name: "Barnaby Quill", role: "Shopper", quote: "Imported goods have never been so cheap. I bought four pairs of trainers this month, which is more than my feet strictly require." }],
+        questions: [
+          "Prices are barely rising and household spending is still growing. What do these two facts rule out?",
+          "Why have imported goods become cheaper in the shops while the price of locally made cheese has not changed?"
+        ]
+      },
+      3: {
+        tables: [
+          { caption: "Exchange rate", head: H, rows: [["Krumbs bought by one plonk", "1.00", "1.20", "1.50"]] },
+          { caption: "What a Grumbrian customer pays for one Wobbleton garden gnome", head: H, rows: [["Price set by the factory (plonks)", "20", "20", "20"], ["Price paid by the Grumbrian customer (krumbs)", "?", "?", "?"]], note: "Work out the missing prices. Multiply the price in plonks by the number of krumbs that one plonk buys." },
+          { caption: "Trade with the rest of the world (millions of plonks per year)", head: H, rows: [["Exports", "800", "700", "540"], ["Imports", "700", "790", "910"]] },
+          { caption: "Grumbria's economy", head: H, rows: [["Growth in national income (% per year)", "2.8", "2.8", "2.8"], ["Spending on imports from other small countries (index, two years ago = 100)", "100", "102", "104"]] }
+        ],
+        witnesses: [{ name: "Gerald Pimm", role: "Customs officer", quote: "The ships arrive full and leave empty. My shift has become mostly a matter of waving at them." }],
+        questions: [
+          "Work out what a 20-plonk gnome costs a Grumbrian customer in each of the three years. What has happened to its price for customers abroad, even though the factory has not changed its price?",
+          "Grumbria's economy is growing and its shoppers are buying more from other small countries. What does this tell you about whether Grumbrian customers have less to spend?"
+        ]
+      },
+      4: {
+        tables: [
+          { caption: "Central Bank interest rate and foreign deposits", head: H, rows: [["Central Bank interest rate (%)", "1.0", "3.0", "4.5"], ["Foreign money deposited in Wobbleton banks (millions of plonks)", "200", "400", "650"]] },
+          { caption: "Government", head: H, rows: [["Government spending (% of national income)", "30", "30", "30"], ["Basic income tax rate (%)", "20", "20", "20"], ["Budget deficit (% of national income)", "1", "1", "1"]] }
+        ],
+        witnesses: [
+          { name: "Sir Pelham Dunkley", role: "Governor of the Central Bank", quote: "I raised interest rates three times because I was worried about inflation that never arrived. Foreign investors love our interest rates and arrive in large numbers carrying suitcases." },
+          { name: "Lord Pinch", role: "Finance Minister", quote: "I changed no taxes and no spending, so you may cross my name off your list." }
+        ],
+        questions: [
+          "Why might foreign investors want to put their money into Wobbleton banks?",
+          "To deposit money in a Wobbleton bank, a foreign investor first needs plonks. What does buying plonks do to the demand for the plonk, and so to its exchange rate?"
+        ]
+      }
+    },
+    whyNot: {
+      demandpull: "Inflation has fallen to 0.4% and unemployment has risen, which is the opposite of what happens when spending runs ahead of production.",
+      costpush: "Wages are rising steadily by 3% and inflation is falling, so there has been no jump in firms' costs that would force prices up.",
+      foreignslump: "Grumbria's economy is growing at 2.8% a year and its shoppers are buying more from other small countries, which means they still have money to spend. They are buying fewer goods from Lower Wobbleton in particular.",
+      structural: "The export factories still have the same machines and skilled workers. They are idle because orders have fallen, and not because the workers' skills are out of date.",
+      cuts: "Government spending and taxes have not changed, so the government has not taken spending power out of the economy."
+    },
+    explanation: "The Central Bank raised interest rates from 1% to 4.5%, which made Lower Wobbleton a very attractive place for foreigners to deposit their savings. Foreign investors had to buy plonks to make these deposits, and this extra demand pushed the exchange rate up from 1.00 to 1.50 krumbs per plonk. A gnome priced at 20 plonks therefore rose from 20 to 30 krumbs for Grumbrian customers, so they bought fewer, exports fell and the export industries laid off workers. At the same time imports became cheaper for people in Lower Wobbleton, which explains the full shops, the rising imports and the falling inflation. A rise in the exchange rate like this is called an appreciation.",
+    clues: [
+      { id: "a", text: "One plonk now buys 1.50 krumbs instead of 1.00, so a 20-plonk gnome rose from 20 to 30 krumbs for Grumbrian customers, although its price in plonks did not change.", from: [3], key: true, why: "Foreign customers face a 50% higher price even though the factory changed nothing, and this is the direct effect of the stronger plonk." },
+      { id: "b", text: "Interest rates rose from 1% to 4.5%, and foreign deposits in Wobbleton banks more than tripled.", from: [4], key: true, why: "Foreigners had to buy plonks to make these deposits, and the extra demand for plonks is what pushed the exchange rate up." },
+      { id: "c", text: "Unemployment in the export factories rose from 4% to 22%, while hospitals, schools and construction were hardly affected.", from: [1], key: true, why: "The job losses are concentrated in the industries that sell abroad, which are the ones affected by a change in the exchange rate." },
+      { id: "d", text: "Exports fell from 800 to 540 million plonks while imports rose from 700 to 910.", from: [3], key: true, why: "A stronger currency makes exports dearer for foreigners and imports cheaper for people at home, which fits this pattern." },
+      { id: "e", text: "Dorothea Gubbins's gnomes have the same pointy hats and unsettling smiles as before.", from: [1], key: false, why: "This shows that the product has not changed, which is useful, but it does not show what has changed." },
+      { id: "f", text: "Government spending and taxes have not changed.", from: [4], key: false, why: "This helps to rule out government cuts as the cause, but it does not show why exports have fallen." },
+      { id: "g", text: "Grumbria's economy is growing at 2.8% a year.", from: [3], key: false, why: "This helps to rule out a recession abroad, but it does not show why Grumbrian customers are buying less from Lower Wobbleton." },
+      { id: "h", text: "Barnaby Quill bought four pairs of trainers this month.", from: [2], key: false, why: "This is an amusing detail, and the figures for imports are much better evidence." }
+    ],
+    remedies: [
+      { text: "The Central Bank lowers interest rates, so that foreign deposits flow in more slowly and the exchange rate eases back.", pts: 2, why: "Lower interest rates make Lower Wobbleton a less attractive place to deposit money, which reduces the demand for plonks and lets the exchange rate fall, so that exports become competitive again." },
+      { text: "The government pays a temporary subsidy to export firms until the exchange rate returns to normal.", pts: 1, why: "This could protect some jobs for a while, but it does not remove the cause, and the problem returns if the exchange rate stays high." },
+      { text: "The government cuts income tax so that people spend more in the shops.", pts: 0, why: "Extra spending would go mostly on cheap imported goods and would not bring back the lost export orders." },
+      { text: "The government bans imports from Grumbria.", pts: 0, why: "A ban would invite Grumbria to ban Wobbleton's exports in return, which would make the problem worse." }
+    ]
+  }
+];
+
+</script>
+<script>
+(function () {
+  "use strict";
+
+  var app = document.getElementById("app");
+  var panelEl = document.getElementById("panel");
+  var S = { screen: "home" };
+  var lastFocusBeforePanel = null;
+
+  /* ---------- helpers ---------- */
+  function esc(s) {
+    return String(s).replace(/&/g, "&amp;").replace(/</g, "&lt;").replace(/>/g, "&gt;").replace(/"/g, "&quot;");
+  }
+  function shuffle(arr) {
+    var a = arr.slice();
+    for (var i = a.length - 1; i > 0; i--) {
+      var j = Math.floor(Math.random() * (i + 1));
+      var t = a[i]; a[i] = a[j]; a[j] = t;
+    }
+    return a;
+  }
+  function caseById(id) { return CASES[id - 1]; }
+  function suspectById(id) { return SUSPECTS.filter(function (s) { return s.id === id; })[0]; }
+  function setHash(h) { try { if (location.hash !== h) { location.hash = h; } } catch (e) { /* hash not available */ } }
+
+  function newTeam(caseId) {
+    var c = caseById(caseId);
+    return {
+      caseId: caseId, attempts: 0, ruled: [], pick: null, solved: false, culpritPts: 0,
+      clueOrder: shuffle(c.clues.map(function (x) { return x.id; })),
+      remedyOrder: shuffle(c.remedies.map(function (x, i) { return i; })),
+      clues: [], remedy: null, notice: ""
+    };
+  }
+
+  /* ---------- navigation ---------- */
+  function go(screen, extra) {
+    Object.keys(extra || {}).forEach(function (k) { S[k] = extra[k]; });
+    S.screen = screen;
+    if (screen === "home") { setHash("#home"); }
+    else if (S.caseId) { setHash("#case-" + S.caseId); }
+    render(true);
+  }
+
+  function fromHash() {
+    var m = (location.hash || "").match(/^#case-([1-6])$/);
+    if (m) { return { screen: "case", caseId: +m[1] }; }
+    return null;
+  }
+
+  window.addEventListener("hashchange", function () {
+    var h = fromHash();
+    if (h && (S.caseId !== h.caseId || S.screen === "home")) {
+      S.caseId = h.caseId; S.screen = "case"; S.fileId = null; render(true);
+    } else if (!h && location.hash === "#home" && S.screen !== "home") {
+      S.screen = "home"; render(true);
+    }
+  });
+
+  /* ---------- rendering pieces ---------- */
+  function table(t) {
+    var h = '<div class="tablewrap" tabindex="0" role="region" aria-label="' + esc(t.caption) + '"><table><caption>' + esc(t.caption) + "</caption><thead><tr>";
+    t.head.forEach(function (c, i) {
+      h += '<th scope="col"' + (i > 0 ? ' class="num"' : "") + ">" + (i === 0 ? '<span class="sr">Measure</span>' : esc(c)) + "</th>";
+    });
+    h += "</tr></thead><tbody>";
+    t.rows.forEach(function (r) {
+      h += "<tr>";
+      r.forEach(function (c, i) {
+        if (i === 0) { h += '<th scope="row">' + esc(c) + "</th>"; }
+        else if (c === "?") { h += '<td class="num"><span class="blank">Work it out</span></td>'; }
+        else { h += '<td class="num">' + esc(c) + "</td>"; }
+      });
+      h += "</tr>";
+    });
+    h += "</tbody></table></div>";
+    if (t.note) { h += '<p class="tablenote">' + esc(t.note) + "</p>"; }
+    return h;
+  }
+
+  function fileTag(from) {
+    return from.map(function (n) { return "File " + n; }).join(" and ");
+  }
+
+  /* ---------- screens ---------- */
+  function renderHome() {
+    var h = '<section class="hero"><p class="eyebrow">A detective game for four economists</p>' +
+      "<h1>Who Wrecked <span class=\"hl\">Lower Wobbleton?</span></h1>" +
+      '<p class="lead">Lower Wobbleton is a small island country whose economy has gone badly wrong. Your team of four detectives has to work out what caused the problem, prove it with evidence, and advise the government on how to put it right.</p></section>';
+
+    h += '<section class="block"><h2>About Lower Wobbleton</h2>' +
+      "<p>Lower Wobbleton makes garden gnomes, woolly jumpers, cheese and sausages. Its money is the plonk. Its large neighbour, Grumbria, buys most of its exports and uses a different currency, the krumb. If you meet a word you do not know, press the Key words button at the top of any page, because it explains every economic term used in the game.</p></section>";
+
+    h += '<section class="block"><h2>How to play</h2><ol class="steps">' +
+      "<li><strong>Choose a case below</strong> and agree with your team which one you will play.</li>" +
+      "<li><strong>Each detective opens a different evidence file,</strong> numbered 1 to 4. Every file holds different information, which means that no detective can solve the case alone.</li>" +
+      "<li><strong>Read only your own file.</strong> Then explain to the rest of the team what you found, in your own words, because they cannot see your file.</li>" +
+      "<li><strong>Discuss the evidence together.</strong> Some details are red herrings, which are clues that look important but do not explain the problem, so your team has to decide which facts really matter.</li>" +
+      "<li><strong>Open the Team Table when you agree.</strong> One person enters the team's answers there: first who wrecked Lower Wobbleton, then the four clues that prove it, and finally what the government should do about it.</li></ol>" +
+      '<div class="callout"><p><strong>Playing on one device?</strong> Each detective reads their file, presses Close my file, and passes the device to the next person.</p>' +
+      "<p><strong>Playing on four devices?</strong> Each detective opens this page on their own device and chooses the same case. Only one person needs to use the Team Table.</p></div></section>";
+
+    h += '<section class="block"><h2>Choose a case</h2><div class="cases">';
+    CASES.forEach(function (c) {
+      h += '<button class="casecard" data-act="open-case" data-case="' + c.id + '">' +
+        '<span class="casenum">' + c.id + "</span>" +
+        '<span class="casebody"><span class="level">' + esc(c.level) + "</span>" +
+        '<span class="casetitle">' + esc(c.title) + "</span>" +
+        '<span class="caseteaser">' + esc(c.teaser) + "</span></span></button>";
+    });
+    h += "</div></section>";
+    return h;
+  }
+
+  function renderCase() {
+    var c = caseById(S.caseId);
+    var h = '<nav class="crumbs"><button class="linkbtn" data-act="home">All cases</button></nav>' +
+      '<section class="hero small"><p class="eyebrow">Case ' + c.id + " · " + esc(c.level) + "</p><h1>" + esc(c.title) + "</h1></section>";
+    h += '<section class="block"><h2>The scene</h2><p>' + esc(c.scene) + "</p>" +
+      '<h3>What has gone wrong</h3><ul class="plain">';
+    c.headlines.forEach(function (x) { h += "<li>" + esc(x) + "</li>"; });
+    h += "</ul></section>";
+
+    h += '<section class="block"><h2>Choose your file</h2>' +
+      "<p>Each detective chooses a different file and reads only that one. Your team needs all four files to solve the case, so it is a good idea to agree who takes which number before anyone opens a file.</p>" +
+      '<div class="files">';
+    [1, 2, 3, 4].forEach(function (n) {
+      h += '<button class="filecard f' + n + '" data-act="open-file" data-file="' + n + '">' +
+        '<span class="filenum">' + n + "</span>" +
+        '<span class="filebody"><span class="filename">File ' + n + ": " + esc(FILE_ROLES[n].name) + "</span>" +
+        '<span class="fileabout">' + esc(FILE_ROLES[n].about) + "</span></span></button>";
+    });
+    h += "</div></section>";
+
+    h += '<section class="block"><h2>When your team is ready</h2>' +
+      "<p>Open the Team Table once every detective has explained their file to the others and the team has discussed what it all means. You can come back to your files from the Team Table at any time.</p>" +
+      '<button class="btn primary" data-act="open-team">Open the Team Table</button></section>';
+    return h;
+  }
+
+  function renderFile() {
+    var c = caseById(S.caseId), n = S.fileId, f = c.files[n], role = FILE_ROLES[n];
+    var h = '<div class="filepage f' + n + '">' +
+      '<div class="filetop"><button class="btn" data-act="close-file">Close my file</button></div>' +
+      '<section class="hero small"><p class="eyebrow">' + esc(c.title) + '</p><h1><span class="bignum">' + n + "</span> " + esc(role.name) + "</h1>" +
+      '<p class="lead">You are the detective for this file. ' + esc(role.about) + "</p></section>";
+
+    h += '<section class="block"><h2>The figures</h2>';
+    f.tables.forEach(function (t) { h += table(t); });
+    h += "</section>";
+
+    h += '<section class="block"><h2>' + (f.witnesses.length > 1 ? "What people told you" : "What a witness told you") + "</h2>";
+    f.witnesses.forEach(function (w) {
+      h += '<figure class="quote"><blockquote>' + esc(w.quote) + "</blockquote><figcaption>" + esc(w.name) + ", " + esc(w.role.charAt(0).toLowerCase() + w.role.slice(1)) + "</figcaption></figure>";
+    });
+    h += "</section>";
+
+    h += '<section class="block"><h2>Questions to think about</h2><ol class="questions">';
+    f.questions.forEach(function (q) { h += "<li>" + esc(q) + "</li>"; });
+    h += "</ol></section>";
+
+    h += '<section class="block callout"><h2>What to do next</h2>' +
+      "<p>Tell the rest of your team what you found, using your own words, because they cannot see this file. Listen to what they found in theirs as well, since the explanation for the problem needs facts from all four files.</p>" +
+      '<button class="btn primary" data-act="close-file">Close my file</button></section></div>';
+    return h;
+  }
+
+  function renderTeam() {
+    var c = caseById(S.caseId), t = S.team;
+    var h = '<nav class="crumbs"><button class="linkbtn" data-act="back-case">Back to the case and the files</button></nav>' +
+      '<section class="hero small"><p class="eyebrow">Team Table · ' + esc(c.title) + "</p><h1>Make your accusation</h1>" +
+      '<p class="lead">Choose one person to enter the team\'s answers. Before you answer, make sure that every detective has explained what is in their file.</p></section>';
+
+    /* Step 1 */
+    h += '<section class="block step"><h2><span class="stepno">1</span> Who wrecked Lower Wobbleton?</h2>';
+    if (t.solved) {
+      var cs = suspectById(c.culprit);
+      h += '<div class="result good" role="status"><strong>Correct.</strong> The culprit is <strong>' + esc(cs.name.toLowerCase()) + "</strong> (" + esc(cs.term.toLowerCase()) + ").</div>";
+    } else {
+      h += "<p>Choose the suspect that best explains what has gone wrong. You can change your answer if you are wrong, although your score is higher when you accuse correctly at the first attempt.</p>";
+    }
+    h += '<div class="suspects" role="radiogroup" aria-label="Suspects">';
+    SUSPECTS.forEach(function (s) {
+      var ruled = t.ruled.indexOf(s.id) >= 0;
+      var isCulprit = t.solved && s.id === c.culprit;
+      var dis = ruled || t.solved;
+      h += '<label class="opt suspect' + (ruled ? " ruled" : "") + (isCulprit ? " chosen" : "") + (t.pick === s.id ? " picked" : "") + '" for="sus-' + s.id + '">' +
+        '<input type="radio" name="suspect" id="sus-' + s.id + '" value="' + s.id + '"' + (t.pick === s.id ? " checked" : "") + (dis ? " disabled" : "") + ' data-act="pick-suspect">' +
+        '<span class="optbody"><span class="optname">' + esc(s.name) + ' <span class="term">(' + esc(s.term) + ")</span></span>" +
+        '<span class="optdesc">' + esc(s.desc) + "</span>";
+      if (ruled) { h += '<span class="ruledtext"><strong>Ruled out.</strong> ' + esc(c.whyNot[s.id]) + "</span>"; }
+      h += "</span></label>";
+    });
+    h += "</div>";
+    if (!t.solved) {
+      if (t.notice) { h += '<div class="result bad" role="status">' + esc(t.notice) + "</div>"; }
+      h += '<button class="btn primary" data-act="accuse"' + (t.pick ? "" : " disabled") + ">Make the accusation</button>";
+    }
+    h += "</section>";
+
+    /* Step 2 */
+    if (t.solved) {
+      h += '<section class="block step"><h2><span class="stepno">2</span> Which four clues prove it?</h2>' +
+        "<p>Some of these clues are true but do not prove your accusation. Choose the four that best prove who wrecked Lower Wobbleton. The label under each clue shows which file it came from.</p>" +
+        '<p class="counter" role="status" aria-live="polite"><strong>' + t.clues.length + " of 4</strong> clues chosen</p>" +
+        '<div class="clues">';
+      t.clueOrder.forEach(function (id) {
+        var cl = c.clues.filter(function (x) { return x.id === id; })[0];
+        var on = t.clues.indexOf(id) >= 0;
+        var dis = !on && t.clues.length >= 4;
+        h += '<label class="opt clue' + (on ? " picked" : "") + (dis ? " dim" : "") + '" for="clue-' + id + '">' +
+          '<input type="checkbox" id="clue-' + id + '" value="' + id + '"' + (on ? " checked" : "") + (dis ? " disabled" : "") + ' data-act="pick-clue">' +
+          '<span class="optbody"><span class="optname">' + esc(cl.text) + '</span><span class="optdesc">From ' + esc(fileTag(cl.from)) + "</span></span></label>";
+      });
+      h += "</div></section>";
+    }
+
+    /* Step 3 */
+    if (t.solved && t.clues.length === 4) {
+      h += '<section class="block step"><h2><span class="stepno">3</span> What should the government do?</h2>' +
+        "<p>Choose the response that deals best with the cause you have identified.</p>" +
+        '<div class="remedies" role="radiogroup" aria-label="Responses">';
+      t.remedyOrder.forEach(function (i) {
+        var r = c.remedies[i];
+        h += '<label class="opt remedy' + (t.remedy === i ? " picked" : "") + '" for="rem-' + i + '">' +
+          '<input type="radio" name="remedy" id="rem-' + i + '" value="' + i + '"' + (t.remedy === i ? " checked" : "") + ' data-act="pick-remedy">' +
+          '<span class="optbody"><span class="optname">' + esc(r.text) + "</span></span></label>";
+      });
+      h += '</div><button class="btn primary" data-act="close-case"' + (t.remedy === null ? " disabled" : "") + ">Close the case</button></section>";
+    }
+    return h;
+  }
+
+  function rank(score) {
+    if (score >= 9) { return "Chief Inspector"; }
+    if (score >= 7) { return "Detective Inspector"; }
+    if (score >= 5) { return "Sergeant"; }
+    return "Trainee detective";
+  }
+  function rankLine(score) {
+    if (score >= 9) { return "Your team found the culprit and the evidence, and chose a response that tackles the cause."; }
+    if (score >= 7) { return "Your team solved the case, with a few details to improve."; }
+    if (score >= 5) { return "Your team found its way to the answer, and the explanations below show where the evidence was stronger than it first looked."; }
+    return "Read the explanations below and replay the case, because the second attempt usually goes much better.";
+  }
+
+  function renderVerdict() {
+    var c = caseById(S.caseId), t = S.team;
+    var keyChosen = t.clues.filter(function (id) { return c.clues.filter(function (x) { return x.id === id; })[0].key; }).length;
+    var rem = c.remedies[t.remedy];
+    var total = t.culpritPts + keyChosen + rem.pts;
+    var cs = suspectById(c.culprit);
+
+    var h = '<section class="hero small verdict"><div class="stamp" aria-hidden="true">Case closed</div>' +
+      '<p class="eyebrow">' + esc(c.title) + "</p><h1>" + total + " out of 10</h1>" +
+      '<p class="lead"><strong>' + rank(total) + ".</strong> " + rankLine(total) + "</p></section>";
+
+    h += '<section class="block"><h2>Your score</h2><div class="tablewrap"><table><caption class="sr">Score breakdown</caption><thead><tr><th scope="col">Part of the case</th><th scope="col" class="num">Your score</th><th scope="col" class="num">Highest possible</th></tr></thead><tbody>' +
+      '<tr><th scope="row">Accusation (' + (t.attempts === 0 ? "correct at the first attempt" : "correct after " + (t.attempts + 1) + " attempts") + ')</th><td class="num">' + t.culpritPts + '</td><td class="num">4</td></tr>' +
+      '<tr><th scope="row">Clues (' + keyChosen + " of the 4 strongest chosen)</th><td class=\"num\">" + keyChosen + '</td><td class="num">4</td></tr>' +
+      '<tr><th scope="row">Government response</th><td class="num">' + rem.pts + '</td><td class="num">2</td></tr>' +
+      '<tr class="total"><th scope="row">Total</th><td class="num">' + total + '</td><td class="num">10</td></tr></tbody></table></div></section>';
+
+    h += '<section class="block"><h2>What happened in Lower Wobbleton</h2><p class="culprit"><strong>' + esc(cs.name) + "</strong> (" + esc(cs.term.toLowerCase()) + ")</p><p>" + esc(c.explanation) + "</p></section>";
+
+    h += '<section class="block"><h2>Your clues</h2><ul class="review">';
+    t.clueOrder.forEach(function (id) {
+      var cl = c.clues.filter(function (x) { return x.id === id; })[0];
+      var on = t.clues.indexOf(id) >= 0;
+      var label, cls;
+      if (on && cl.key) { label = "You chose this, and it is one of the four strongest clues."; cls = "good"; }
+      else if (on) { label = "You chose this, but it does not prove the accusation."; cls = "bad"; }
+      else if (cl.key) { label = "You did not choose this, and it is one of the four strongest clues."; cls = "missed"; }
+      else { label = "You did not choose this, which was reasonable because it does not prove the accusation."; cls = "neutral"; }
+      h += '<li class="' + cls + '"><span class="status">' + esc(label) + '</span><span class="cluetext">' + esc(cl.text) + '</span><span class="why">' + esc(cl.why) + "</span></li>";
+    });
+    h += "</ul></section>";
+
+    var best = c.remedies.filter(function (r) { return r.pts === 2; })[0];
+    h += '<section class="block"><h2>The government\'s response</h2>' +
+      '<p><strong>You chose:</strong> ' + esc(rem.text) + "</p><p>" + esc(rem.why) + "</p>";
+    if (rem.pts < 2) { h += '<p><strong>The strongest response was:</strong> ' + esc(best.text) + "</p><p>" + esc(best.why) + "</p>"; }
+    h += "</section>";
+
+    h += '<section class="block actions"><button class="btn primary" data-act="replay">Play this case again</button>' +
+      '<button class="btn" data-act="home">Choose another case</button></section>';
+    return h;
+  }
+
+  /* ---------- key words panel ---------- */
+  function openPanel() {
+    lastFocusBeforePanel = document.activeElement;
+    var h = '<div class="panelbox" role="dialog" aria-modal="true" aria-labelledby="panel-title"><div class="panelhead"><h2 id="panel-title">Key words</h2><button class="btn" id="panel-close" data-act="close-panel">Close</button></div><dl>';
+    GLOSSARY.forEach(function (g) { h += "<dt>" + esc(g[0]) + "</dt><dd>" + esc(g[1]) + "</dd>"; });
+    h += "</dl></div>";
+    panelEl.innerHTML = h;
+    panelEl.hidden = false;
+    document.body.classList.add("lock");
+    var b = document.getElementById("panel-close");
+    if (b) { b.focus(); }
+  }
+  function closePanel() {
+    panelEl.hidden = true;
+    panelEl.innerHTML = "";
+    document.body.classList.remove("lock");
+    if (lastFocusBeforePanel && lastFocusBeforePanel.focus) { lastFocusBeforePanel.focus(); }
+  }
+
+  /* ---------- main render ---------- */
+  function render(scrollTop) {
+    var activeId = document.activeElement && document.activeElement.id;
+    var y = window.scrollY;
+    var html;
+    if (S.screen === "case") { html = renderCase(); }
+    else if (S.screen === "file") { html = renderFile(); }
+    else if (S.screen === "team") { html = renderTeam(); }
+    else if (S.screen === "verdict") { html = renderVerdict(); }
+    else { html = renderHome(); }
+    app.innerHTML = html;
+    document.body.setAttribute("data-screen", S.screen);
+    if (scrollTop) { window.scrollTo(0, 0); }
+    else {
+      window.scrollTo(0, y);
+      if (activeId) { var el = document.getElementById(activeId); if (el && el.focus) { el.focus({ preventScroll: true }); } }
+    }
+  }
+
+  /* ---------- events ---------- */
+  document.addEventListener("click", function (e) {
+    var el = e.target.closest("[data-act]");
+    if (!el) { return; }
+    var act = el.getAttribute("data-act");
+    if (act === "pick-suspect" || act === "pick-clue" || act === "pick-remedy") { return; }
+    if (el.disabled) { return; }
+    var t = S.team;
+    if (act === "open-panel") { openPanel(); }
+    else if (act === "close-panel") { closePanel(); }
+    else if (act === "home") { go("home", { caseId: null, fileId: null }); }
+    else if (act === "open-case") { go("case", { caseId: +el.getAttribute("data-case"), fileId: null }); }
+    else if (act === "open-file") { go("file", { fileId: +el.getAttribute("data-file") }); }
+    else if (act === "close-file" || act === "back-case") { go("case", { fileId: null }); }
+    else if (act === "open-team") {
+      if (!S.team || S.team.caseId !== S.caseId) { S.team = newTeam(S.caseId); }
+      go("team", {});
+    }
+    else if (act === "accuse") {
+      var c = caseById(S.caseId);
+      if (!t.pick) { return; }
+      if (t.pick === c.culprit) {
+        t.solved = true;
+        t.culpritPts = t.attempts === 0 ? 4 : (t.attempts === 1 ? 2 : 1);
+        t.notice = "";
+      } else {
+        t.ruled.push(t.pick);
+        t.attempts += 1;
+        t.pick = null;
+        t.notice = "That suspect does not fit the evidence. The reason is shown on the card that is now marked Ruled out. Read it, discuss it with your team and try again.";
+      }
+      render(false);
+    }
+    else if (act === "close-case") {
+      if (t.remedy === null) { return; }
+      go("verdict", {});
+    }
+    else if (act === "replay") { S.team = newTeam(S.caseId); go("case", { fileId: null }); }
+  });
+
+  document.addEventListener("change", function (e) {
+    var el = e.target;
+    var act = el.getAttribute && el.getAttribute("data-act");
+    var t = S.team;
+    if (act === "pick-suspect") { t.pick = el.value; t.notice = ""; render(false); }
+    else if (act === "pick-clue") {
+      var i = t.clues.indexOf(el.value);
+      if (el.checked && i < 0 && t.clues.length < 4) { t.clues.push(el.value); }
+      else if (!el.checked && i >= 0) { t.clues.splice(i, 1); }
+      if (t.clues.length < 4) { t.remedy = null; }
+      render(false);
+    }
+    else if (act === "pick-remedy") { t.remedy = +el.value; render(false); }
+  });
+
+  document.addEventListener("keydown", function (e) {
+    if (e.key === "Escape" && !panelEl.hidden) { closePanel(); }
+    if (e.key === "Tab" && !panelEl.hidden) {
+      var f = panelEl.querySelectorAll("button");
+      if (f.length) { e.preventDefault(); f[0].focus(); }
+    }
+  });
+
+  document.getElementById("keywords-btn").addEventListener("click", openPanel);
+  panelEl.addEventListener("click", function (e) { if (e.target === panelEl) { closePanel(); } });
+
+  /* ---------- start ---------- */
+  function start(saved) {
+    if (saved && saved.screen) { S = saved; }
+    else { var h = fromHash(); if (h) { S = h; } }
+    render(false);
+  }
+  if (window.claude && window.claude.hot && window.claude.hot.snapshot) {
+    window.claude.hot.snapshot(function () { return S; });
+  }
+  if (window.claude && window.claude.hot && window.claude.hot.ready) {
+    window.claude.hot.ready(start);
+  } else {
+    start((window.claude && window.claude.hot && window.claude.hot.data) || {});
+  }
+})();
+
+</script>
+</body>
+</html>
